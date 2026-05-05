@@ -19,11 +19,19 @@ class EmployeesAddForm extends Component {
 
   onSubmit = (e) => {
     e.preventDefault();
-    this.props.onAdd(this.state.name, this.state.salary);
-    this.setState({
-      name: "",
-      salary: "",
-    });
+    if (this.state.name.trim().length < 3) {
+      alert("Имя должно быть минимум 3 символа!");
+      return;
+    } else if (!this.state.salary) {
+      alert("Необходимо указать зарплату!");
+      return;
+    } else {
+      this.props.onAdd(this.state.name.trim(), this.state.salary);
+      this.setState({
+        name: "",
+        salary: "",
+      });
+    }
   };
 
   render() {
